@@ -1,0 +1,2 @@
+jTextField1,jTextField2,10
+100,jTextField2,10
