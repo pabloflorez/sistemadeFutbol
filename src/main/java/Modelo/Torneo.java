@@ -256,6 +256,8 @@ public class Torneo {
 			cantidadTotalJugadores += equipo.cantidadJugadores;
 		}
 
+		System.out.println("cantidad total jugadores "+ cantidadTotalJugadores);
+		
 		Jugador[] jugadores = new Jugador[cantidadTotalJugadores];
 		int i = 0;
 		int equipoMenosGolesRecibidos, equipoMasGolesAnotados;
@@ -281,6 +283,10 @@ public class Torneo {
 				i++;
 			}
 		}
+		
+		for (int j = 0; j < jugadores.length; j++) {
+			System.out.println("Jugadores "+ jugadores[j]);
+		}
 
 		int mayorGoles, menosAmarillas, masAsistencias;
 		String jugadorMasGoles, jugadorMenosAmarillas, jugadorMasAsistencias;
@@ -291,6 +297,8 @@ public class Torneo {
 		masAsistencias = jugadores[0].numAsistencias;
 		jugadorMasAsistencias = jugadores[0].nombreJugador;
 		for (int j = 1; j < jugadores.length; j++) {
+			System.out.println("I "+ j);
+			System.out.println("I "+ jugadores[j]);
 			if (mayorGoles < jugadores[i].golesMarcados) {
 				mayorGoles = jugadores[i].golesMarcados;
 				jugadorMasGoles = jugadores[i].nombreJugador;
