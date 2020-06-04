@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,6 +30,7 @@ public class Jugador {
     int numAsistencias;
     int numAsignado;    
     int Estadisticas[][];
+    ArrayList<Integer> resultados = new ArrayList<>();
     
     /**
      * este constructor crea un jugador con la información que se reciba de la clase equipo
@@ -61,6 +64,15 @@ public class Jugador {
                 Estadisticas[i][3]=tr;
 
         }
+        
+    }
+    
+public void registroResultados(int golesMarcados, int asistencias, int tarjetasAmarillas, int tarjetasRojas){
+        
+        resultados.add(golesMarcados);
+        resultados.add(asistencias);
+        resultados.add(tarjetasAmarillas);
+        resultados.add(tarjetasRojas);        
         
     }
 }
