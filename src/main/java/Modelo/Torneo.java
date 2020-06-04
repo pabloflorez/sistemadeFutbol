@@ -308,7 +308,7 @@ public class Torneo {
 			}
 
 			if (masAsistencias < jugadores[j].numAsistencias) {
-				mayorGoles = jugadores[j].numAsistencias;
+				masAsistencias = jugadores[j].numAsistencias;
 				jugadorMasAsistencias = jugadores[j].nombreJugador;
 			}
 		}
