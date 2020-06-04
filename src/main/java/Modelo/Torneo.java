@@ -299,19 +299,19 @@ public class Torneo {
 		for (int j = 1; j < jugadores.length; j++) {
 			System.out.println("I "+ j);
 			System.out.println("I "+ jugadores[j]);
-			if (mayorGoles < jugadores[i].golesMarcados) {
-				mayorGoles = jugadores[i].golesMarcados;
-				jugadorMasGoles = jugadores[i].nombreJugador;
+			if (mayorGoles < jugadores[j].golesMarcados) {
+				mayorGoles = jugadores[j].golesMarcados;
+				jugadorMasGoles = jugadores[j].nombreJugador;
 			}
 
-			if (menosAmarillas > jugadores[i].tarjetasAmarillas) {
-				mayorGoles = jugadores[i].golesMarcados;
-				jugadorMenosAmarillas = jugadores[i].nombreJugador;
+			if (menosAmarillas > jugadores[j].tarjetasAmarillas) {
+				mayorGoles = jugadores[j].golesMarcados;
+				jugadorMenosAmarillas = jugadores[j].nombreJugador;
 			}
 
-			if (masAsistencias < jugadores[i].tarjetasAmarillas) {
-				mayorGoles = jugadores[i].golesMarcados;
-				jugadorMasAsistencias = jugadores[i].nombreJugador;
+			if (masAsistencias < jugadores[j].tarjetasAmarillas) {
+				mayorGoles = jugadores[j].golesMarcados;
+				jugadorMasAsistencias = jugadores[j].nombreJugador;
 			}
 		}
 
