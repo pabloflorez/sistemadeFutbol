@@ -169,8 +169,6 @@ public class Torneo {
 
 	public void registrarGoles() {
 
-		int golesMarcados, asistencias, tarjetasAmarillas, tarjetasRojas, resp;
-
 		for (Grupo g : grupos) {
 			for (int j = 0; j < g.partidos.size(); j++) {
 				String nombreEqu1 = g.partidos.get(j).getEquipo1().nombreEquipo;
@@ -182,8 +180,9 @@ public class Torneo {
 
 				int golesTotalesEquipo1 = 0;
 				int golesTotalesEquipo2 = 0;
-				for (int i = 0; i < jugadoresEq1.length; i++) {
-					System.out.println("El jugador " + jugadoresEq1[i].nombreJugador + " jugó?\n1.Si\n2.No");
+				int golesMarcados, asistencias, tarjetasAmarillas, tarjetasRojas, resp;
+				for (int equ1 = 0; equ1 < jugadoresEq1.length; equ1++) {
+					System.out.println("El jugador " + jugadoresEq1[equ1].nombreJugador + " jugó?\n1.Si\n2.No");
 					resp = tc.nextInt();
 
 					if (resp == 1) {
@@ -201,49 +200,50 @@ public class Torneo {
 						System.out.println("Ingrese la cantidad de tarjetas rojas recibidas:");
 						tarjetasRojas = tc.nextInt();
 
-						jugadoresEq1[i].registroResultados(golesMarcados, asistencias, tarjetasAmarillas,
+						jugadoresEq1[equ1].registroResultados(golesMarcados, asistencias, tarjetasAmarillas,
 								tarjetasRojas);
 
 					} else {
-						jugadoresEq1[i].registroResultados(0, 0, 0, 0);
+						jugadoresEq1[equ1].registroResultados(0, 0, 0, 0);
 					}
 				}
 
 				System.out.println("Ingrese por favor los resultado del equipo " + nombreEqu2 + " por cada jugador");
-
+				int golesMarcadosEq1, asistenciasEq1, tarjetasAmarillasEq1, tarjetasRojasEq1, respEq1;
+				
 				Jugador jugadoresEq2[] = g.partidos.get(j).getEquipo2().jugadores;
-				for (int i = 0; i < jugadoresEq2.length; i++) {
-					System.out.println("El jugador " + jugadoresEq2[i].nombreJugador + " jugó?\n1.Si\n2.No");
-					resp = tc.nextInt();
+				for (int equpo2 = 0; equpo2 < jugadoresEq2.length; equpo2++) {
+					System.out.println("El jugador " + jugadoresEq2[equpo2].nombreJugador + " jugó?\n1.Si\n2.No");
+					respEq1 = tc.nextInt();
 
-					if (resp == 1) {
+					if (respEq1 == 1) {
 
 						System.out.println("Ingrese la cantidad de goles marcados:");
-						golesMarcados = tc.nextInt();
-						golesTotalesEquipo1 += golesMarcados;
+						golesMarcadosEq1 = tc.nextInt();
+						golesTotalesEquipo2 += golesMarcadosEq1;
 
 						System.out.println("Ingrese la cantidad de asistencias:");
-						asistencias = tc.nextInt();
+						asistenciasEq1 = tc.nextInt();
 
 						System.out.println("Ingrese la cantidad de tarjetas amarillas recibidas:");
-						tarjetasAmarillas = tc.nextInt();
+						tarjetasAmarillasEq1 = tc.nextInt();
 
 						System.out.println("Ingrese la cantidad de tarjetas rojas recibidas:");
-						tarjetasRojas = tc.nextInt();
+						tarjetasRojasEq1 = tc.nextInt();
 
-						jugadoresEq1[i].registroResultados(golesMarcados, asistencias, tarjetasAmarillas,
-								tarjetasRojas);
+						jugadoresEq2[equpo2].registroResultados(golesMarcadosEq1, asistenciasEq1, tarjetasAmarillasEq1,
+								tarjetasRojasEq1);
 
 					} else {
-						jugadoresEq1[i].registroResultados(0, 0, 0, 0);
+						jugadoresEq2[equpo2].registroResultados(0, 0, 0, 0);
 					}
 				}
 				// goles anotados y recibidos equipo 1
-				g.partidos.get(j).getEquipo1().numDeGolesAnotados = golesTotalesEquipo1;
-				g.partidos.get(j).getEquipo1().numDeGolesRecibidos = golesTotalesEquipo2;
+				g.partidos.get(j).getEquipo1().numDeGolesAnotados += golesTotalesEquipo1;
+				g.partidos.get(j).getEquipo1().numDeGolesRecibidos += golesTotalesEquipo2;
 				// goles anotados y recibidos equipo 2
-				g.partidos.get(j).getEquipo2().numDeGolesAnotados = golesTotalesEquipo2;
-				g.partidos.get(j).getEquipo2().numDeGolesRecibidos = golesTotalesEquipo1;
+				g.partidos.get(j).getEquipo2().numDeGolesAnotados += golesTotalesEquipo2;
+				g.partidos.get(j).getEquipo2().numDeGolesRecibidos += golesTotalesEquipo1;
 
 			}
 		}
@@ -256,10 +256,10 @@ public class Torneo {
 			cantidadTotalJugadores += equipo.cantidadJugadores;
 		}
 
-		System.out.println("cantidad total jugadores "+ cantidadTotalJugadores);
-		
+		System.out.println("cantidad total jugadores " + cantidadTotalJugadores);
+
 		Jugador[] jugadores = new Jugador[cantidadTotalJugadores];
-		int i = 0;
+		int cuentaJugadores = 0;
 		int equipoMenosGolesRecibidos, equipoMasGolesAnotados;
 		String equipoMenosRecibidos, nEquipoMasGolesAnotados;
 		equipoMenosGolesRecibidos = equipos[0].numDeGolesRecibidos;
@@ -268,24 +268,24 @@ public class Torneo {
 		equipoMasGolesAnotados = equipos[0].numDeGolesAnotados;
 		nEquipoMasGolesAnotados = equipos[0].nombreEquipo;
 		for (int j = 0; j < equipos.length; j++) {
-			if (equipoMasGolesAnotados < equipos[i].numDeGolesAnotados) {
-				equipoMasGolesAnotados = equipos[i].numDeGolesAnotados;
-				nEquipoMasGolesAnotados = equipos[i].nombreEquipo;
+			if (equipoMasGolesAnotados < equipos[j].numDeGolesAnotados) {
+				equipoMasGolesAnotados = equipos[j].numDeGolesAnotados;
+				nEquipoMasGolesAnotados = equipos[j].nombreEquipo;
 			}
-			if (equipoMenosGolesRecibidos > equipos[i].numDeGolesRecibidos) {
-				equipoMenosGolesRecibidos = equipos[i].numDeGolesRecibidos;
-				equipoMenosRecibidos = equipos[i].nombreEquipo;
+			if (equipoMenosGolesRecibidos > equipos[j].numDeGolesRecibidos) {
+				equipoMenosGolesRecibidos = equipos[j].numDeGolesRecibidos;
+				equipoMenosRecibidos = equipos[j].nombreEquipo;
 			}
 
 			// Creando un vector con todos los jugadores
 			for (Jugador jug : equipos[j].jugadores) {
-				jugadores[i] = jug;
-				i++;
+				jugadores[cuentaJugadores] = jug;
+				cuentaJugadores++;
 			}
 		}
-		
+
 		for (int j = 0; j < jugadores.length; j++) {
-			System.out.println("Jugadores "+ jugadores[j]);
+			System.out.println("Jugadores " + jugadores[j].toString());
 		}
 
 		int mayorGoles, menosAmarillas, masAsistencias;
@@ -297,20 +297,18 @@ public class Torneo {
 		masAsistencias = jugadores[0].numAsistencias;
 		jugadorMasAsistencias = jugadores[0].nombreJugador;
 		for (int j = 1; j < jugadores.length; j++) {
-			System.out.println("I "+ j);
-			System.out.println("I "+ jugadores[j]);
 			if (mayorGoles < jugadores[j].golesMarcados) {
 				mayorGoles = jugadores[j].golesMarcados;
 				jugadorMasGoles = jugadores[j].nombreJugador;
 			}
 
 			if (menosAmarillas > jugadores[j].tarjetasAmarillas) {
-				mayorGoles = jugadores[j].golesMarcados;
+				menosAmarillas = jugadores[j].tarjetasAmarillas;
 				jugadorMenosAmarillas = jugadores[j].nombreJugador;
 			}
 
-			if (masAsistencias < jugadores[j].tarjetasAmarillas) {
-				mayorGoles = jugadores[j].golesMarcados;
+			if (masAsistencias < jugadores[j].numAsistencias) {
+				mayorGoles = jugadores[j].numAsistencias;
 				jugadorMasAsistencias = jugadores[j].nombreJugador;
 			}
 		}
