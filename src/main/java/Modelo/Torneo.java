@@ -49,7 +49,7 @@ public class Torneo {
 		cantidadDeEquipos = tc.nextInt();
 		if (cantidadDeEquipos == 0) {
 			System.exit(0);
-		} else if (cantidadDeEquipos % 4 != 0 || cantidadDeEquipos < 0) {
+		} else if ((cantidadDeEquipos != 4 && cantidadDeEquipos % 8 != 0) || cantidadDeEquipos < 0) {
 			System.out.println("Error, el número de equipos debe ser multiplo de 4 y mayor a cero");
 			return false;
 		}
@@ -240,18 +240,18 @@ public class Torneo {
 						jugadoresEq2[equpo2].registroResultados(0, 0, 0, 0);
 					}
 				}
-				
-				if(golesTotalesEquipo1 == golesTotalesEquipo2) {
+
+				if (golesTotalesEquipo1 == golesTotalesEquipo2) {
 					g.partidos.get(j).getEquipo1().puntos += 1;
 					g.partidos.get(j).getEquipo2().puntos += 1;
-				}else if(golesTotalesEquipo1 > golesTotalesEquipo2) {
+				} else if (golesTotalesEquipo1 > golesTotalesEquipo2) {
 					g.partidos.get(j).getEquipo1().puntos += 3;
 					g.partidos.get(j).getEquipo2().puntos += 0;
-				}else if(golesTotalesEquipo1 < golesTotalesEquipo2){
+				} else if (golesTotalesEquipo1 < golesTotalesEquipo2) {
 					g.partidos.get(j).getEquipo1().puntos += 0;
 					g.partidos.get(j).getEquipo2().puntos += 3;
 				}
-				
+
 				// goles anotados y recibidos equipo 1
 				g.partidos.get(j).getEquipo1().numDeGolesAnotados += golesTotalesEquipo1;
 				g.partidos.get(j).getEquipo1().numDeGolesRecibidos += golesTotalesEquipo2;
@@ -342,20 +342,51 @@ public class Torneo {
 			System.out.println(equipos[i].nombreEquipo);
 			System.out.println(equipos[i].puntos);
 		}
-		
-		if (equipos.length == 4 || ((equipos.length / 4) % 2 == 0)) {
-			int numFase = 0;
-			ArrayList<Equipo> nuevaFase = new ArrayList<>();
-			
+
+		ArrayList<Equipo> nuevosEquiposTorneo = new ArrayList<>();
+
+		ArrayList<Equipo> equiposPrimerPuesto = new ArrayList<>();
+		ArrayList<Equipo> equiposSegundoPuesto = new ArrayList<>();
+		if (grupos.length > 0) {
 			for (Grupo g : grupos) {
 				Arrays.sort(g.equipos);
-				for (int i = 0; i < g.equipos.length/2; i++) {
-					
-				}
-				for (int j = 0; j < g.partidos.size(); j++) {
-
+				for (int i = 0; i < (g.equipos.length) / 2; i += 2) {
+					equiposPrimerPuesto.add(g.equipos[i]);
+					nuevosEquiposTorneo.add(g.equipos[i]);
+					if (g.equipos.length > 2) {
+						equiposSegundoPuesto.add(g.equipos[i + 1]);
+						nuevosEquiposTorneo.add(g.equipos[i + 1]);
+					}
 				}
 			}
+
+			int cantidadGrupos = (equiposPrimerPuesto.size()) / 2;
+			Grupo[] gruposFase = new Grupo[equiposPrimerPuesto.size()];
+			int indiceGrupos = 0;
+			if (cantidadGrupos > 1) {
+				for (int i = 0; i < cantidadGrupos; i += 2) {
+					Grupo grupoFase = new Grupo("grupo" + indiceGrupos);
+					Partido p = new Partido(equiposPrimerPuesto.get(i), equiposPrimerPuesto.get(i + 1));
+					grupoFase.partidos.add(p);
+					gruposFase[indiceGrupos] = grupoFase;
+					indiceGrupos++;
+					if (equiposSegundoPuesto.size() > 0) {
+						Grupo grupoFaseE = new Grupo("grupo" + indiceGrupos);
+						Partido part = new Partido(equiposSegundoPuesto.get(i), equiposSegundoPuesto.get(i + 1));
+						grupoFaseE.partidos.add(part);
+						gruposFase[indiceGrupos] = grupoFaseE;
+						indiceGrupos++;
+					}
+				}
+				grupos = gruposFase;
+
+			} else {
+				System.out.println("El ganador es " + equiposPrimerPuesto.get(0).nombreEquipo);
+			}
+
+			equipos = new Equipo[nuevosEquiposTorneo.size()];
+		}else {
+			System.out.println("Inicie fase inicial");
 		}
 
 	}
