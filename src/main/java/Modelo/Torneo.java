@@ -363,7 +363,21 @@ public class Torneo {
 			int cantidadGrupos = (equiposPrimerPuesto.size()) / 2;
 			Grupo[] gruposFase = new Grupo[equiposPrimerPuesto.size()];
 			int indiceGrupos = 0;
-			if (cantidadGrupos > 1) {
+			
+			
+			System.out.println("fase "+ indiceGrupos);
+			System.out.println("fase "+ equiposPrimerPuesto + " tamano "+ equiposPrimerPuesto.size());
+			System.out.println("fase "+ equiposSegundoPuesto + " tamano "+ equiposSegundoPuesto.size());
+			
+			for (Equipo eq : nuevosEquiposTorneo) {
+				System.out.println(eq.nombreEquipo + " "+ eq.puntos);
+			}
+			
+			for (Grupo gr : grupos) {
+				System.out.println(gr.nombreGrupo + " "+ gr);
+			}
+			
+			if (nuevosEquiposTorneo.size() > 2) {
 				for (int i = 0; i < cantidadGrupos; i += 2) {
 					Grupo grupoFase = new Grupo("grupo" + indiceGrupos);
 					Partido p = new Partido(equiposPrimerPuesto.get(i), equiposPrimerPuesto.get(i + 1));
