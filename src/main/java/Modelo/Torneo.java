@@ -337,10 +337,10 @@ public class Torneo {
 	}
 
 	public void fases() {
+
 		Arrays.sort(equipos);
 		for (int i = 0; i < equipos.length; i++) {
-			System.out.println(equipos[i].nombreEquipo);
-			System.out.println(equipos[i].puntos);
+			System.out.println(equipos[i].nombreEquipo + " " + equipos[i].puntos);
 		}
 
 		ArrayList<Equipo> nuevosEquiposTorneo = new ArrayList<>();
@@ -361,33 +361,49 @@ public class Torneo {
 			}
 
 			int cantidadGrupos = (equiposPrimerPuesto.size()) / 2;
-			Grupo[] gruposFase = new Grupo[equiposPrimerPuesto.size()];
+
+			Grupo[] gruposFase;
+			if (equiposSegundoPuesto.size() > 0) {
+				gruposFase = new Grupo[equiposPrimerPuesto.size()];
+			} else {
+				gruposFase = new Grupo[1];
+			}
 			int indiceGrupos = 0;
-			
-			
-			System.out.println("fase "+ indiceGrupos);
-			System.out.println("fase "+ equiposPrimerPuesto + " tamano "+ equiposPrimerPuesto.size());
-			System.out.println("fase "+ equiposSegundoPuesto + " tamano "+ equiposSegundoPuesto.size());
-			
+
 			for (Equipo eq : nuevosEquiposTorneo) {
-				System.out.println(eq.nombreEquipo + " "+ eq.puntos);
+				System.out.println(eq.nombreEquipo + " " + eq.puntos);
 			}
-			
+
 			for (Grupo gr : grupos) {
-				System.out.println(gr.nombreGrupo + " "+ gr);
+				System.out.println(gr.nombreGrupo + " " + gr);
 			}
-			
-			if (nuevosEquiposTorneo.size() > 2) {
+			int indiceEquipos = 0;
+			if (nuevosEquiposTorneo.size() >= 2) {
 				for (int i = 0; i < cantidadGrupos; i += 2) {
 					Grupo grupoFase = new Grupo("grupo" + indiceGrupos);
+					Equipo[] equipo = new Equipo[2];
+					equipo[indiceEquipos] = equiposPrimerPuesto.get(i);
+					indiceEquipos++;
+					equipo[indiceEquipos] = equiposPrimerPuesto.get(i + 1);
+					indiceEquipos++;
 					Partido p = new Partido(equiposPrimerPuesto.get(i), equiposPrimerPuesto.get(i + 1));
 					grupoFase.partidos.add(p);
+					grupoFase.agregarEquipo(equipo);
 					gruposFase[indiceGrupos] = grupoFase;
 					indiceGrupos++;
+
+					equipo[0] = equiposPrimerPuesto.get(i);
 					if (equiposSegundoPuesto.size() > 0) {
+						indiceEquipos = 0;
 						Grupo grupoFaseE = new Grupo("grupo" + indiceGrupos);
+						Equipo[] equipo1 = new Equipo[2];
+						equipo1[0] = equiposSegundoPuesto.get(i);
+						indiceEquipos++;
+						equipo1[1] = equiposSegundoPuesto.get(i + 1);
+						indiceEquipos++;
 						Partido part = new Partido(equiposSegundoPuesto.get(i), equiposSegundoPuesto.get(i + 1));
 						grupoFaseE.partidos.add(part);
+						grupoFaseE.agregarEquipo(equipo1);
 						gruposFase[indiceGrupos] = grupoFaseE;
 						indiceGrupos++;
 					}
@@ -399,9 +415,17 @@ public class Torneo {
 			}
 
 			equipos = new Equipo[nuevosEquiposTorneo.size()];
-		}else {
+			equipos = nuevosEquiposTorneo.toArray(equipos);
+			for (Equipo ex : nuevosEquiposTorneo) {
+				System.out.println("exxxx " + ex.nombreEquipo + " " + ex.cantidadJugadores);
+			}
+			System.out.println("equipos nuevo");
+			for (Equipo e : equipos) {
+				System.out.println("equipo " + e.cantidadJugadores);
+			}
+		} else {
 			System.out.println("Inicie fase inicial");
-		}
+		} // ejecutalo pero como debug, ya vi cu
 
 	}
 

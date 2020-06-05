@@ -31,8 +31,8 @@ public class Sistema {
 		System.out.println("Ingrese el nombre del torneo \n");
 		String nombreTorneo = tc.next();
 		torneo.crearUnNuevoTorneo(nombreTorneo);
-		if (nombreTorneo != null) {
-			while (!crearEquipos) {
+		if(nombreTorneo!=null) {
+			while(!crearEquipos) {
 				crearEquipos = torneo.crearEquipos();
 			}
 		}
@@ -49,7 +49,8 @@ public class Sistema {
 			System.out.println("8.Salir");
 			System.out.println("**********************************************************");
 			respuesta = tc.nextInt();
-
+			
+			
 			switch (respuesta) {
 			case 1:
 				torneo.eliminarJugador();
@@ -85,5 +86,6 @@ public class Sistema {
 			}
 		} while (respuesta < 8);
 	}
-
+	
+	
 }

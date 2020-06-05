@@ -57,6 +57,11 @@ public class Grupo {
            
     }
     
+    public void agregarEquipo(Equipo [] equipo){
+        this.equipos = equipo;
+
+      }
+    
     //este método ingresa las estadisticas de un partido
     
     public void ingresarInformacion(){
