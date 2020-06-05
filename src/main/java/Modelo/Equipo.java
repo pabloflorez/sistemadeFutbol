@@ -19,7 +19,7 @@ import javax.management.MXBean;
 
 import java.util.Random;
 
-public class Equipo {
+public class Equipo implements Comparable<Equipo>{
 
 	Scanner tc = new Scanner(System.in);
 
@@ -155,6 +155,17 @@ public class Equipo {
 
 	public void desempatar() {
 
+	}
+
+	@Override
+	public int compareTo(Equipo o) {
+		if (this.puntos < o.puntos) {
+            return 1;
+        }
+        if (this.puntos > o.puntos) {
+            return -1;
+        }
+        return 0;
 	}
 
 }

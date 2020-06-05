@@ -66,7 +66,7 @@ public class Sistema {
 				break;
 
 			case 4:
-				
+				torneo.fases();
 				break;
 
 			case 5:
