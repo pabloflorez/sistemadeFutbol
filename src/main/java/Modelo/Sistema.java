@@ -1,6 +1,6 @@
 package Modelo;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,83 +9,82 @@ import java.util.ArrayList;
  */
 
 /**
- * esta es la clase principal, la cual le muestra 
- * al usuario las opciones que tiene habilitadas
- * y le permite escoger alguna a realizar
- * 04/05/2020
+ * esta es la clase principal, la cual le muestra al usuario las opciones que
+ * tiene habilitadas y le permite escoger alguna a realizar 04/05/2020
+ *
  * @author Juan y Jenny
  */
 
-import java.util.Scanner;
-
 public class Sistema {
-	public static void main(String arg[]) {
 
-		Scanner tc = new Scanner(System.in);
-		int respuesta;
-		boolean crearEquipos = false;
-		Torneo torneo = new Torneo();
+    public static void main(String arg[]) {
+        
+        Scanner tc = new Scanner(System.in);
+        
+        int respuesta;
+        boolean crearEquipos = false;
+        Torneo torneo = new Torneo();
 
-		System.out.println("*************Bienvenido al Sistema de Fútbol*************");
+        System.out.println("*************Bienvenido al Sistema de Fútbol*************");
 
-		System.out.println("Ingrese el nombre del torneo \n");
-		String nombreTorneo = tc.next();
-		torneo.crearUnNuevoTorneo(nombreTorneo);
-		if(nombreTorneo!=null) {
-			while(!crearEquipos) {
-				crearEquipos = torneo.crearEquipos();
-			}
-		}
+        System.out.print("Ingrese el nombre del torneo: ");
+        String nombreTorneo = tc.next();
+        torneo.crearUnNuevoTorneo(nombreTorneo);
+        if (nombreTorneo != null) {
+            while (!crearEquipos) {
+                crearEquipos = torneo.crearEquipos();
+            }
+        }
 
-		do {
-			System.out.println("\n De acuerdo a su necesidad, seleccione la opción desea realizar:");
-			System.out.println("1.Eliminar un jugador de un equipo");
-			System.out.println("2.Iniciar fase de grupos");
-			System.out.println("3.Registrar los resultados de los partidos");
-			System.out.println("4.Generar las llaves de la siguiente fase");
-			System.out.println("5.Registrar resultados de una llave");
-			System.out.println("6.Ver información de un jugador");
-			System.out.println("7.Generar informe por torneo");
-			System.out.println("8.Salir");
-			System.out.println("**********************************************************");
-			respuesta = tc.nextInt();
-			
-			
-			switch (respuesta) {
-			case 1:
-				torneo.eliminarJugador();
-				break;
+        do {
+            System.out.println("\n***************************************************************");
+            System.out.println("De acuerdo a su necesidad, seleccione la opción desea realizar:");
+            System.out.println("1.Eliminar un jugador de un equipo");
+            System.out.println("2.Iniciar fase de grupos");
+            System.out.println("3.Registrar los resultados de los partidos");
+            System.out.println("4.Generar las llaves de la siguiente fase");
+            System.out.println("5.Registrar resultados de una llave");
+            System.out.println("6.Ver información de un jugador");
+            System.out.println("7.Generar informe por torneo");
+            System.out.println("8.Salir");
+            System.out.println("***************************************************************");
+            respuesta = tc.nextInt();
 
-			case 2:
-				torneo.iniciarFaseDeGrupos();
-				torneo.crearPartidos();
-				break;
+            switch (respuesta) {
+                case 1:
+                    torneo.eliminarJugador();
+                    break;
 
-			case 3:
-				torneo.registrarGoles();
-				break;
+                case 2:
+                    torneo.iniciarFaseDeGrupos();
+                    torneo.crearPartidos();
+                    break;
 
-			case 4:
-				torneo.fases();
-				break;
+                case 3:
+                    torneo.registrarGoles();
+                    break;
 
-			case 5:
+                case 4:
+                    torneo.fases();
+                    break;
 
-				break;
+                case 5:
+                    torneo.registrarGolesFases();
+                    break;
 
-			case 6:
+                case 6:
+                    torneo.infoJugadores();
+                    break;
+                case 7:
+                    torneo.estadisticas();
+                    break;
+                case 8:
+                    System.exit(0);
+                    break;
 
-				break;
-			case 7:
-				torneo.estadisticas();
-				break;
-			case 8:
-				System.exit(0);
-				break;
+            }
+        } while (respuesta < 8);
+    }
 
-			}
-		} while (respuesta < 8);
-	}
-	
-	
 }
+
