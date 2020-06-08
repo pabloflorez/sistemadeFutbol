@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +16,6 @@ import java.util.ArrayList;
  * @author Juan y Jenny
  */
 
-import java.util.Scanner;
-
 public class Jugador {
 
 	Scanner tc = new Scanner(System.in);
@@ -24,14 +23,17 @@ public class Jugador {
 	// atributos de la clase
 
 	String nombreJugador;
+        int numAsignado;
+        int Estadisticas[][];
 	int golesMarcados;
+        int numAsistencias;
 	int tarjetasAmarillas;
 	int tarjetasRojas;
-	int numAsistencias;
-	int numAsignado;
-	int Estadisticas[][];
 	ArrayList<Integer> resultados = new ArrayList<>();
 
+	public Jugador() {
+	}
+        
 	/**
 	 * este constructor crea un jugador con la información que se reciba de la clase
 	 * equipo
@@ -39,15 +41,21 @@ public class Jugador {
 	 * @param n  nombre del jugador
 	 * @param na numero asignado al jugador
 	 */
-
-	public Jugador() {
-	}
-
+        
 	public Jugador(String n, int na) {
 		this.nombreJugador = n;
 		this.numAsignado = na;
 	}
-
+        
+        /**
+         * este método recibe las estadisticas de cada jugador por partido
+         * 
+         * @param gm goles marcados
+         * @param na número de asistencias
+         * @param ta tarjetas amarillas
+         * @param tr tarjetas rojas
+         */
+        
 	public void Estadisticas(int gm, int na, int ta, int tr) {
 
 		this.golesMarcados = gm;
@@ -67,7 +75,15 @@ public class Jugador {
 		}
 
 	}
-
+        
+        /**
+         * este método recibe las estadisticas de cada jugador por partido cuando un jugador no juega
+         * @param golesMarcados
+         * @param asistencias
+         * @param tarjetasAmarillas
+         * @param tarjetasRojas 
+         */
+        
 	public void registroResultados(int golesMarcados, int asistencias, int tarjetasAmarillas, int tarjetasRojas) {
 
 		this.golesMarcados += golesMarcados;
@@ -80,6 +96,9 @@ public class Jugador {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return this.nombreJugador + " goles anotados "+ this.golesMarcados+ " asist "+ this.numAsistencias+ " amarillas "+ this.tarjetasAmarillas+ " rojas "+ this.tarjetasRojas;
+		return this.nombreJugador + " Goles anotados: "+ this.golesMarcados
+                        + " Asistencias: "+ this.numAsistencias
+                        + " Tarjetas Amarillas: "+ this.tarjetasAmarillas
+                        + " Tarjetas Rojas "+ this.tarjetasRojas;
 	}
 }
